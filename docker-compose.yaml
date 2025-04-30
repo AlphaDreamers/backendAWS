@@ -1,0 +1,45 @@
+services:
+#  auth:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+  rabbitmq:
+    image: rabbitmq:management
+    restart: always
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    ports:
+      - "5673:5672"      # avoid conflict with another app
+      - "15673:15673"    # management UI
+
+  postgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=authdb
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+
+  redis:
+      image: redis:latest
+      restart: always
+      ports:
+        - "6379:6379"
+
+  consul:
+      image: hashicorp/consul:latest
+      restart: always
+      ports:
+        - "8500:8500"
+        - "8601:8601/udp"
+      command: "agent -dev -client=0.0.0.0"
+
+volumes:
+    postgres_data:

@@ -1,0 +1,20 @@
+server:
+  port: "8081"
+database:
+  dsn: postgres://postgres:postgres@localhost:5432/authdb?sslmode=disable
+
+
+
+consul:
+  address: "localhost:8500"
+  service_id: "auth-service"           # Unique service ID
+  service_name: "auth-service"         # Service name
+  service_address: "127.0.0.1"         # The address of your service instance (can be localhost or a real IP)
+  service_port: 8080                   # Port the service is running on
+  health_check_url: "http://127.0.0.1:8080/health"  # Health check endpoint
+  health_check_interval: "10s"         # How often to check health (e.g., every 10 seconds)
+  health_check_timeout: "5s"           # Timeout for the health check
+
+jwt:
+  secret: zj9yxKrFRDzAKZR+6SzNauLrkAEhqPHICCKNlw7v3Ha4kpVVnIzWz/1q8/v24O5M0hCxbjts29prJ4/u1+oNlg==
+

@@ -1,0 +1,14 @@
+syntax =  "proto3";
+
+option  go_package = "github.com/SwanHtetAungPhyo/common/proto";
+message UserExistenceReq  {
+  string email = 1;
+  string userId = 2;
+}
+
+message  UserExistenceRep {
+  bool exist = 1;
+}
+service UserRPCMethods {
+  rpc CheckUserExistenceByEmail(UserExistenceReq) returns (UserExistenceRep);
+}
